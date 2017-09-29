@@ -1,4 +1,4 @@
-var towerLength = 7; // Automate this to make the length automatically change in threeTowers var.
+var towerLength = 6; // Automate this to make the length automatically change in threeTowers var.
 
 
 var threeTowers = [[], [], []]; 
@@ -9,16 +9,14 @@ for(var y = 1; y<=towerLength; y++){
 
 var minMoves = Math.pow(2, towerLength) - 1;
 
-var even = minMoves % 2 === 0;
+var even = towerLength % 2 == 0;
 
 
 var x = 1,
 	i = 0,
 	blockToMove; // Use this instead of an individual variable for each case, just makes more sense.
 
-for (i = 0; i < minMoves; i++) { //build in case for odd tower
-//	console.log(x);
-	if (x==1){
+function AtoB(){
 		if(threeTowers[0][0] < threeTowers[1][0] || typeof threeTowers[1][0] === "undefined"){ // A to B 
 			var AtoB = threeTowers[0][0];
 			threeTowers[0].splice(0, 1);
@@ -28,13 +26,10 @@ for (i = 0; i < minMoves; i++) { //build in case for odd tower
 			threeTowers[1].splice(0, 1);
 			threeTowers[0].unshift(BtoA);
 		}
-		x=2;
-		continue;
-	}
-	
-	
-	if(x==2){
-		if(threeTowers[0][0] < threeTowers[2][0] || typeof threeTowers[2][0] === "undefined"){ // A to C
+}
+
+function AtoC(){
+	if(threeTowers[0][0] < threeTowers[2][0] || typeof threeTowers[2][0] === "undefined"){ // A to C
 			var AtoC = threeTowers[0][0];
 			threeTowers[0].splice(0, 1);
 			threeTowers[2].unshift(AtoC);
@@ -44,31 +39,65 @@ for (i = 0; i < minMoves; i++) { //build in case for odd tower
 			threeTowers[2].splice(0, 1);
 			threeTowers[0].unshift(CtoA);
 		}
-		x=3;
-		continue;
-		
+}
+
+function BtoC(){
+	if(threeTowers[1][0] < threeTowers[2][0] || typeof threeTowers[2][0] === "undefined"){// B to C
+		var BtoC = threeTowers[1][0];
+		threeTowers[1].splice(0, 1);
+		threeTowers[2].unshift(BtoC);
+	} else { 																				// C to B
+		var CtoB = threeTowers[2][0];
+		threeTowers[2].splice(0, 1);
+		threeTowers[1].unshift(CtoB);
 	}
-	
-	if(x==3){
-		if(threeTowers[1][0] < threeTowers[2][0] || typeof threeTowers[2][0] === "undefined"){// B to C
-			var BtoC = threeTowers[1][0];
-			threeTowers[1].splice(0, 1);
-			threeTowers[2].unshift(BtoC);
-		} else { 																				// C to B
-			var CtoB = threeTowers[2][0];
-			
-			threeTowers[2].splice(0, 1);
-			
-			threeTowers[1].unshift(CtoB);
+}
+
+for (i = 0; i < minMoves; i++) {
+	if(even){
+		switch(x){
+			case 1:
+				AtoC();
+				x=2;
+				continue;
+				break;
+			case 2:
+				AtoB();
+				x=3;
+				continue;
+				break;
+			case 3:
+				BtoC();
+				x=1;
+				continue;
+				break;
 		}
-		x=1;
-		continue;
+	}else{
+		switch(x){
+			case 1:
+				AtoB();
+				x=2;
+				continue;
+				break;
+			case 2:
+				AtoC();
+				x=3;
+				continue;
+				break;
+			case 3:
+				BtoC();
+				x=1;
+				continue;
+				break;
+		}
 	}
-	
 	
 }
 
 console.log(threeTowers);
+
+
+
 
 
 /*
@@ -77,4 +106,9 @@ if odd number of blocks:
 1. A to B (Either direction)
 2. A to C (Either direction)
 3. B to C (Either direction)
+
+If even:
+1. A to C (either direction)
+2. A to B (either direction)
+3. B to C (either direction )
 */
