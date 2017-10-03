@@ -1,0 +1,12 @@
+.hanoi{
+	display: table;
+}
+
+.hanoi div{
+    display: table-cell;
+}
+
+#a{
+	width: 33%;
+}
+

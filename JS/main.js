@@ -1,25 +1,5 @@
-
-
-var towerLength = 5; 
 var threeTowers = [[], [], []]; 
 var towerHistory = [[], [], []];
-
-for(var y = 1; y<=towerLength; y++){
-	threeTowers[0].push(y);
-}
-
-
-var minMoves = Math.pow(2, towerLength) - 1;
-var even = towerLength % 2 == 0;
-var x = 1,
-	i = 0,
-	blockToMove;
-
-var towerA = document.getElementById("a");
-var towerB = document.getElementById("b");
-var towerC = document.getElementById("c");
-
-
 
 function AtoB(){
 		if(threeTowers[0][0] < threeTowers[1][0] || typeof threeTowers[1][0] === "undefined"){ // A to B 
@@ -60,16 +40,34 @@ function BtoC(){
 }
 
 
+function solveTower(length){
+	
+	var towerLength = length; 
+	threeTowers = [[], [], []]; 
+	towerHistory = [[], [], []];
+
+	for(var y = 1; y<=towerLength; y++){
+		threeTowers[0].push(y);
+	}
 
 
-for (i = 0; i < minMoves; i++) {
-		
+	var minMoves = Math.pow(2, towerLength) - 1;
+	var even = towerLength % 2 == 0;
+	var x = 1,
+		i = 0,
+		blockToMove;
 
+	var towerA = document.getElementById("a");
+	var towerB = document.getElementById("b");
+	var towerC = document.getElementById("c");
+
+	
+	
+	
+	for (i = 0; i < minMoves; i++) {
 	towerHistory[0].push(JSON.stringify(threeTowers[0]));
 	towerHistory[1].push(JSON.stringify(threeTowers[1]));
 	towerHistory[2].push(JSON.stringify(threeTowers[2]));
-	
-		
 	if(even){
 		switch(x){
 			case 1:
@@ -119,16 +117,28 @@ var showTowers = setInterval(function(){
 		towerA.innerHTML = towerHistory[0][i];
 		towerB.innerHTML = towerHistory[1][i];
 		towerC.innerHTML = towerHistory[2][i];
-		console.log("hey");
 		i++;
 		
 		if(i == minMoves+1){
 			clearInterval(showTowers);
 		}
 	}, 500);
+}
 
 
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value; // Display the default slider value
 
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    output.innerHTML = this.value;
+}
+
+
+$('#solve').click(function(){
+	solveTower(slider.value);
+});
 
 
 

@@ -3,17 +3,33 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Tower of Hanoi</title>
+		<link rel="stylesheet" href="CSS/main.css">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	
 	<body>
-		
-		<div>
-			<h1 id="a">1</h1>
-			<h1 id="b">2</h1>
-			<h1 id="c">3</h1>
+		<div id="setTowerLength">
+			<input type="range" min="3" max="10" value="3" class="slider" id="myRange">
+			<h3 id="demo"></h3>
+			<button id="solve">Solve!</button>
 		</div>
 		
+	<div class="hanoi">
+		<div id="a">
+			<div id="one"></div>
+			<div id="two"></div>
+			<div id="three"></div>
+			<div id="four"></div>
+			<div id="five"></div>
+			<div id="six"></div>
+		</div>
+		<div id="b"></div>
+		<div id="c"></div>
+	</div>
+		
+		
+		<script src="JS/jquery-3.2.1.min.js"></script>
+<!--		<script src="bootstrap/js/bootstrap.min.js"></script>-->
 		<script src="JS/main.js" type="text/javascript"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	</body>
 </html>
