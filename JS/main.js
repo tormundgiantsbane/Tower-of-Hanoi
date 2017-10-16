@@ -47,7 +47,12 @@ function solveTower(length){
 	towerHistory = [[], [], []];
 
 	for(var y = 1; y<=towerLength; y++){
-		threeTowers[0].push(y);
+		threeTowers[0].push(y); // Adding proper number of elements to first tower
+		$('#a').append(
+		$('<div/>')
+		.attr("id", "block" + y)
+		.text(y)
+		);
 	}
 
 
@@ -113,16 +118,17 @@ towerHistory[2].push(JSON.stringify(threeTowers[2]));
 
 i=0;
 
-var showTowers = setInterval(function(){
-		towerA.innerHTML = towerHistory[0][i];
-		towerB.innerHTML = towerHistory[1][i];
-		towerC.innerHTML = towerHistory[2][i];
-		i++;
-		
-		if(i == minMoves+1){
-			clearInterval(showTowers);
-		}
-	}, 500);
+	console.log(towerHistory);
+//var showTowers = setInterval(function(){
+//		towerA.innerHTML = towerHistory[0][i];
+//		towerB.innerHTML = towerHistory[1][i];
+//		towerC.innerHTML = towerHistory[2][i];
+//		i++;
+//		
+//		if(i == minMoves+1){
+//			clearInterval(showTowers);
+//		}
+//	}, 500);
 }
 
 
@@ -135,12 +141,16 @@ slider.oninput = function() {
     output.innerHTML = this.value;
 }
 
+for( i=1; i<length; i++){
+	var block = document.createElement("div");
+	block.id  = 'block' + (i);
+	block.innerHTML = i;
+	console.log(i);
+}
 
 $('#solve').click(function(){
 	solveTower(slider.value);
 });
-
-
 
 
 /*
