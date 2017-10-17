@@ -2,14 +2,18 @@ var threeTowers = [[], [], []];
 var towerHistory = [[], [], []];
 
 function AtoB(){
-		if(threeTowers[0][0] < threeTowers[1][0] || typeof threeTowers[1][0] === "undefined"){ // A to B 
-			 blockToMove = threeTowers[0][0];
-			threeTowers[0].splice(0, 1);
-			threeTowers[1].unshift(blockToMove);
+	console.log(parseInt($("#b .block:nth-child(1)").text()));
+	
+		if(parseInt($("#a .block:nth-child(1)").text()) < parseInt($("#b .block:nth-child(1)").text()) || parseInt($("#b .block:nth-child(1)").text()) === NaN){ // A to B 
+//			 blockToMove = threeTowers[0][0];
+//			threeTowers[0].splice(0, 1);
+//			threeTowers[1].unshift(blockToMove);
+			alert("AtoB");
 		}else{																					// B to A
-			 blockToMove = threeTowers[1][0];
-			threeTowers[1].splice(0, 1);
-			threeTowers[0].unshift(blockToMove);
+//			 blockToMove = threeTowers[1][0];
+//			threeTowers[1].splice(0, 1);
+//			threeTowers[0].unshift(blockToMove);
+			alert("BtoA");
 		}
 	
 }
@@ -47,10 +51,11 @@ function solveTower(length){
 	towerHistory = [[], [], []];
 
 	for(var y = 1; y<=towerLength; y++){
-		threeTowers[0].push(y); // Adding proper number of elements to first tower
+		threeTowers[0].push(y);
 		$('#a').append(
 		$('<div/>')
 		.attr("id", "block" + y)
+		.addClass("block")
 		.text(y)
 		);
 	}
@@ -67,68 +72,63 @@ function solveTower(length){
 	var towerC = document.getElementById("c");
 
 	
-	
-	
-	for (i = 0; i < minMoves; i++) {
-	towerHistory[0].push(JSON.stringify(threeTowers[0]));
-	towerHistory[1].push(JSON.stringify(threeTowers[1]));
-	towerHistory[2].push(JSON.stringify(threeTowers[2]));
-	if(even){
-		switch(x){
-			case 1:
-				AtoC();
-				x=2;
-				continue;
-				break;
-			case 2:
-				AtoB();
-				x=3;
-				continue;
-				break;
-			case 3:
-				BtoC();
-				x=1;
-				continue;
-				break;
-		}
-	}else{
-		switch(x){
-			case 1:
-				AtoB();
-				x=2;
-				continue;
-				break;
-			case 2:
-				AtoC();
-				x=3;
-				continue;
-				break;
-			case 3:
-				BtoC();
-				x=1;
-				continue;
-				break;
-		}
-	}
-}
 
 towerHistory[0].push(JSON.stringify(threeTowers[0]));
 towerHistory[1].push(JSON.stringify(threeTowers[1]));
 towerHistory[2].push(JSON.stringify(threeTowers[2]));
 
 i=0;
+	AtoB();
 
-	console.log(towerHistory);
-//var showTowers = setInterval(function(){
-//		towerA.innerHTML = towerHistory[0][i];
-//		towerB.innerHTML = towerHistory[1][i];
-//		towerC.innerHTML = towerHistory[2][i];
-//		i++;
-//		
-//		if(i == minMoves+1){
-//			clearInterval(showTowers);
+	console.log($("#a .block:nth-child(1)").text());
+	
+//	document.getElementById('b').appendChild(document.getElementById('block1'));
+var showTowers = setInterval(function(){
+//		console.log(parseInt($("#block" + x.toString()).text()));
+
+//		if(even){
+//			switch(x){
+//				case 1:
+//					AtoC();
+//					x=2;
+//					continue;
+//					break;
+//				case 2:
+//					AtoB();
+//					x=3;
+//					continue;
+//					break;
+//				case 3:
+//					BtoC();
+//					x=1;
+//					continue;
+//					break;
+//			}
+//		}else{
+//			switch(x){
+//				case 1:
+//					AtoB();
+//					x=2;
+//					continue;
+//					break;
+//				case 2:
+//					AtoC();
+//					x=3;
+//					continue;
+//					break;
+//				case 3:
+//					BtoC();
+//					x=1;
+//					continue;
+//					break;
+//			}
 //		}
-//	}, 500);
+	
+		i++;
+		if(i == minMoves+1){
+			clearInterval(showTowers);
+		}
+	}, 500);
 }
 
 
