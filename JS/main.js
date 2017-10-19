@@ -1,45 +1,34 @@
 var threeTowers = [[], [], []]; 
 var towerHistory = [[], [], []];
 
-function AtoB(){
-	console.log(parseInt($("#b .block:nth-child(1)").text()));
-	
-		if(parseInt($("#a .block:nth-child(1)").text()) < parseInt($("#b .block:nth-child(1)").text()) || parseInt($("#b .block:nth-child(1)").text()) === NaN){ // A to B 
-//			 blockToMove = threeTowers[0][0];
-//			threeTowers[0].splice(0, 1);
-//			threeTowers[1].unshift(blockToMove);
-			alert("AtoB");
+var checkA,
+	checkB,
+	checkC;
+
+function AtoB(a, b){	
+		if(a < b || isNaN(b)){ // A to B 
+			$("#b").prepend($("#a .block:nth-child(1)"));
 		}else{																					// B to A
-//			 blockToMove = threeTowers[1][0];
-//			threeTowers[1].splice(0, 1);
-//			threeTowers[0].unshift(blockToMove);
-			alert("BtoA");
+			$("#a").prepend($("#b .block:nth-child(1)"))
 		}
 	
 }
 
-function AtoC(){
-	if(threeTowers[0][0] < threeTowers[2][0] || typeof threeTowers[2][0] === "undefined"){ // A to C
-			 blockToMove = threeTowers[0][0];
-			threeTowers[0].splice(0, 1);
-			threeTowers[2].unshift(blockToMove);
+function AtoC(a, c){
+	if(a < c || isNaN(c)){ // A to C
+			 $("#c").prepend($("#a .block:nth-child(1)"));
 			
 		}else{ 																					// C to A
-			 blockToMove = threeTowers[2][0];
-			threeTowers[2].splice(0, 1);
-			threeTowers[0].unshift(blockToMove);
+			 $("#a").prepend($("#c .block:nth-child(1)"));
 		}
 }
 
-function BtoC(){
-	if(threeTowers[1][0] < threeTowers[2][0] || typeof threeTowers[2][0] === "undefined"){// B to C
-		 blockToMove = threeTowers[1][0];
-		threeTowers[1].splice(0, 1);
-		threeTowers[2].unshift(blockToMove);
+function BtoC(b, c){
+	if(b < c || isNaN(c)){// B to C
+		$("#c").prepend($("#b .block:nth-child(1)"));
+		
 	} else { 																				// C to B
-		 blockToMove = threeTowers[2][0];
-		threeTowers[2].splice(0, 1);
-		threeTowers[1].unshift(blockToMove);
+		 $("#b").prepend($("#c .block:nth-child(1)"));
 	}
 }
 
@@ -64,65 +53,47 @@ function solveTower(length){
 	var minMoves = Math.pow(2, towerLength) - 1;
 	var even = towerLength % 2 == 0;
 	var x = 1,
-		i = 0,
-		blockToMove;
-
-	var towerA = document.getElementById("a");
-	var towerB = document.getElementById("b");
-	var towerC = document.getElementById("c");
+		i = 0;
 
 	
-
-towerHistory[0].push(JSON.stringify(threeTowers[0]));
-towerHistory[1].push(JSON.stringify(threeTowers[1]));
-towerHistory[2].push(JSON.stringify(threeTowers[2]));
-
-i=0;
-	AtoB();
-
-	console.log($("#a .block:nth-child(1)").text());
-	
-//	document.getElementById('b').appendChild(document.getElementById('block1'));
-var showTowers = setInterval(function(){
+	var showTowers = setInterval(function(){
 //		console.log(parseInt($("#block" + x.toString()).text()));
+	
+	    checkA = parseInt($("#a .block:nth-child(1)").text());
+    	checkB = parseInt($("#b .block:nth-child(1)").text());
+		checkC = parseInt($("#c .block:nth-child(1)").text());
 
-//		if(even){
-//			switch(x){
-//				case 1:
-//					AtoC();
-//					x=2;
-//					continue;
-//					break;
-//				case 2:
-//					AtoB();
-//					x=3;
-//					continue;
-//					break;
-//				case 3:
-//					BtoC();
-//					x=1;
-//					continue;
-//					break;
-//			}
-//		}else{
-//			switch(x){
-//				case 1:
-//					AtoB();
-//					x=2;
-//					continue;
-//					break;
-//				case 2:
-//					AtoC();
-//					x=3;
-//					continue;
-//					break;
-//				case 3:
-//					BtoC();
-//					x=1;
-//					continue;
-//					break;
-//			}
-//		}
+		if(even){
+			switch(x){
+				case 1:
+					AtoC(checkA, checkC);
+					x=2;
+					break;
+				case 2:
+					AtoB(checkA, checkB);
+					x=3;
+					break;
+				case 3:
+					BtoC(checkB, checkC);
+					x=1;
+					break;
+			}
+		}else{
+			switch(x){
+				case 1:
+					AtoB(checkA, checkB);
+					x=2;
+					break;
+				case 2:
+					AtoC(checkA, checkC);
+					x=3;
+					break;
+				case 3:
+					BtoC(checkB, checkC);
+					x=1;
+					break;
+			}
+		}
 	
 		i++;
 		if(i == minMoves+1){
