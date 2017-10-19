@@ -1,16 +1,29 @@
 .hanoi{
-	display: table;
-}
+	width: 450px;
+    overflow: auto;
 
-.hanoi div{
-    display: table-cell;
+		width:800px;
+	margin:0 auto;
 }
-
-#a{
-	width: 33%;
-}
-
 
 .tower{
-	width: 100px;
+	float: left;
+	margin-right: 200px;
+ 	display: table;
+  	margin: 0 auto;
+	height: 300px;
+	width: 50px;
+	background: white;
+	
+}
+
+.block{
+	height: 50px;
+	color: white;
+	border-radius: 7%;
+
+}
+
+.wholeThing{
+
 }

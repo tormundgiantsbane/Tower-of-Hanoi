@@ -1,6 +1,7 @@
 var threeTowers = [[], [], []]; 
 var towerHistory = [[], [], []];
 
+
 var checkA,
 	checkB,
 	checkC;
@@ -44,10 +45,15 @@ function solveTower(length){
 		$('#a').append(
 		$('<div/>')
 		.attr("id", "block" + y)
+	    .css("background-color", "#"+((1<<24)*Math.random()|0).toString(16))
 		.addClass("block")
+		.css("width", 10+(y*10))
 		.text(y)
 		);
 	}
+	
+	/*.css("background-color", "#"+((1<<24)*Math.random()|0).toString(16))
+		.css("width", 10+(y*10)) */
 
 
 	var minMoves = Math.pow(2, towerLength) - 1;
@@ -99,7 +105,7 @@ function solveTower(length){
 		if(i == minMoves+1){
 			clearInterval(showTowers);
 		}
-	}, 500);
+	}, 100);
 }
 
 
